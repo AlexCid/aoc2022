@@ -38,9 +38,9 @@ fn main() {
                 .map(|(idx, _)| idx + 1)
                 .unwrap_or_else(|| dim_y.saturating_sub(j + 1));
             let left = (1..=j)
-                .map(|dj| trees[i][j - dj] /*< trees[i][j]*/)
+                .map(|dj| trees[i][j - dj] < trees[i][j])
                 .enumerate()
-                .find(|v| v.1 >= trees[i][j])
+                .find(|v| !v.1)
                 .map(|(idx, _)| idx + 1)
                 .unwrap_or(j);
             let res = left * right * down * up;
